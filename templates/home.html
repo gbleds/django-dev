@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block head_title %} Lynden || {{ block.super }} {% endblock head_title %} 
+{% block content%}
+<p>Hello {{ name }}. You are {{ age }} years old</p>
+
+	{% for list in mylist %}
+		{{list}}
+	{% endfor %}
+
+{% endblock content %}
