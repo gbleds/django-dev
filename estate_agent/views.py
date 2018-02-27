@@ -1,7 +1,8 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.views import View
-from django.views.generic.base import TemplateView, ListView
+from django.views.generic.base import TemplateView
+from django.views.generic.list import ListView
 
 from .models import EstateAgent
 
@@ -31,7 +32,9 @@ def estateagent_listview(request):
 
 class EstateAgentListView(ListView):
 	queryset = EstateAgent.objects.all()
+	template_name='estate_agent/estate_agent_list.html'
 
 
 class ChelmsfordEstateAgentListView(ListView):
-	queryset = EstateAgent.objects.all()
+	queryset = EstateAgent.objects.filter()
+	template_name='estate_agent/estate_agent_list.html'
