@@ -17,12 +17,22 @@ from django.conf.urls import url
 from django.contrib import admin
 
 from django.views.generic.base import TemplateView
-from estate_agent.views import HomeView, estateagent_listview, EstateAgentListView
+from estate_agent.views import (
+    HomeView, 
+    EstateAgentListView,
+    EstateAgentDetailView, 
+    estate_agent_createview,
+    EstateAgentCreateView,
+)
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', HomeView.as_view()),
     url(r'^estate_agents/$', EstateAgentListView.as_view()),
+    # url(r'^estate_agents/(?P<slug>\w+)/$', EstateAgentListView.as_view()),
+    url(r'^estate_agents/create/$', EstateAgentCreateView.as_view()),
+    url(r'^estate_agents/(?P<slug>[\w-]+)/$', EstateAgentDetailView.as_view()),
+    # url(r'^estate_agents/ipswich/$', IpswichEstateAgentListView.as_view()),
     url(r'^about/$', TemplateView.as_view(template_name="about.html")),
     url(r'^contact/$', TemplateView.as_view(template_name="contact.html")),
 ]

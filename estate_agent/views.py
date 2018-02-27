@@ -1,10 +1,30 @@
-from django.shortcuts import render
-from django.http import HttpResponse
+from django.db.models import Q
+from django.shortcuts import render, get_object_or_404
+from django.http import HttpResponse, HttpResponseRedirect
 from django.views import View
 from django.views.generic.base import TemplateView
 from django.views.generic.list import ListView
+from django.views.generic.detail import DetailView
+from django.views.generic.edit import CreateView
 
+from .forms import EstateAgentCreateForm, EstateAgentCreateFormModel
 from .models import EstateAgent
+
+
+def estate_agent_createview(request):
+	form = EstateAgentCreateFormModel(request.POST or None)
+	errors = None
+	if form.is_valid():
+		form.save()
+		return HttpResponseRedirect("/estate_agents/")
+	
+	if form.errors:
+		print(form.errors)
+		errors = form.errors
+
+	template_name = 'estate_agent/form.html'
+	context = {"form": form, "errors": errors}
+	return render(request, template_name, context)
 
 class HomeView(TemplateView):
 	template_name = 'home.html'
@@ -21,20 +41,26 @@ class HomeView(TemplateView):
 		print (context)
 		return context
 
-
-def estateagent_listview(request):
-	template_name='estate_agent/estate_agent_list.html'
-	queryset = EstateAgent.objects.all()
-	context = {
-		"object_list": queryset
-	}
-	return render(request, template_name, context)
-
 class EstateAgentListView(ListView):
 	queryset = EstateAgent.objects.all()
 	template_name='estate_agent/estate_agent_list.html'
 
+	def get_queryset(self):
+		print (self.kwargs)
+		slug = self.kwargs.get("slug")
+		if slug:
+			queryset = EstateAgent.objects.filter(
+				Q(address2__iexact=slug) |
+				Q(address2__icontains=slug)
+			)
+		else:			
+			queryset = EstateAgent.objects.all()
+		return queryset
 
-class ChelmsfordEstateAgentListView(ListView):
-	queryset = EstateAgent.objects.filter()
-	template_name='estate_agent/estate_agent_list.html'
+class EstateAgentDetailView(DetailView):
+	queryset = EstateAgent.objects.all()
+
+class EstateAgentCreateView(CreateView):
+	form_class = EstateAgentCreateFormModel
+	template_name = 'estate_agent/form.html'
+	success_url = "/estate_agents/"
