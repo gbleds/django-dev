@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block head_title %} Estate Agents || {{ block.super }} {% endblock head_title %}
+{% block content%}
+
+<h1>Details: {{ object.title }}, <small>{{ object.address2 }}</small></h1>
+<p>{{ object.updated }}</p>
+
+
+{% endblock content %}
