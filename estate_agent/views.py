@@ -70,7 +70,7 @@ class EstateAgentDetailView(DetailView):
 class EstateAgentCreateView(LoginRequiredMixin, CreateView):
 	form_class = EstateAgentCreateFormModel
 	template_name = 'estate_agent/form.html'
-	success_url = "/estate_agents/"
+	# success_url = "/estate_agents/"
 	login_url="/login/"
 
 	def form_valid(self, form):

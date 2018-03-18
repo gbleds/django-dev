@@ -4,6 +4,7 @@ from django.db.models.signals import pre_save, post_save
 
 from .utils import unique_slug_generator
 from .validators import validate_location
+from django.core.urlresolvers import reverse
 
 User = settings.AUTH_USER_MODEL
 
@@ -24,6 +25,9 @@ class EstateAgent(models.Model):
 	@property
 	def title(self):
 		return self.name
+
+	def get_absolute_url(self):
+		return reverse('estate_agents:detail', kwargs={'slug': self.slug})
 
 def ea_pre_save_receiver(sender, instance, *args, **kwargs):
 	print('saving...')

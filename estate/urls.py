@@ -13,7 +13,7 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
-from django.conf.urls import url
+from django.conf.urls import url, include
 from django.contrib import admin
 from django.views.generic.base import TemplateView
 
@@ -29,14 +29,9 @@ from estate_agent.views import (
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^$', HomeView.as_view()),
+    url(r'^$', HomeView.as_view(), name='home'),
     url(r'^login/$', LoginView.as_view(), name='login'),
-    url(r'^estate_agents/$', EstateAgentListView.as_view()),
-    # url(r'^estate_agents/(?P<slug>\w+)/$', EstateAgentListView.as_view()),
-    # url(r'^estate_agents/create/$', estate_agent_createview),
-    url(r'^estate_agents/create/$', EstateAgentCreateView.as_view()),
-    url(r'^estate_agents/(?P<slug>[\w-]+)/$', EstateAgentDetailView.as_view()),
-    # url(r'^estate_agents/ipswich/$', IpswichEstateAgentListView.as_view()),
-    url(r'^about/$', TemplateView.as_view(template_name="about.html")),
-    url(r'^contact/$', TemplateView.as_view(template_name="contact.html")),
+    url(r'^estate_agent', include('estate_agent.urls', namespace='estate_agents')),
+    url(r'^about/$', TemplateView.as_view(template_name="about.html"), name='about'),
+    url(r'^contact/$', TemplateView.as_view(template_name="contact.html"), name='contact'),
 ]
