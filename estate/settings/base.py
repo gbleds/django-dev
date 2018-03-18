@@ -52,6 +52,7 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'estate.urls'
+LOGIN_URL = '/login/'
 
 TEMPLATES = [
     {

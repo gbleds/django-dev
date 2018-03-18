@@ -15,8 +15,10 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
-
 from django.views.generic.base import TemplateView
+
+from django.contrib.auth.views import LoginView
+
 from estate_agent.views import (
     HomeView, 
     EstateAgentListView,
@@ -28,8 +30,10 @@ from estate_agent.views import (
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', HomeView.as_view()),
+    url(r'^login/$', LoginView.as_view(), name='login'),
     url(r'^estate_agents/$', EstateAgentListView.as_view()),
     # url(r'^estate_agents/(?P<slug>\w+)/$', EstateAgentListView.as_view()),
+    # url(r'^estate_agents/create/$', estate_agent_createview),
     url(r'^estate_agents/create/$', EstateAgentCreateView.as_view()),
     url(r'^estate_agents/(?P<slug>[\w-]+)/$', EstateAgentDetailView.as_view()),
     # url(r'^estate_agents/ipswich/$', IpswichEstateAgentListView.as_view()),

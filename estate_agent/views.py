@@ -1,3 +1,5 @@
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Q
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect
@@ -10,13 +12,18 @@ from django.views.generic.edit import CreateView
 from .forms import EstateAgentCreateForm, EstateAgentCreateFormModel
 from .models import EstateAgent
 
-
+@login_required(login_url='login.html')
 def estate_agent_createview(request):
 	form = EstateAgentCreateFormModel(request.POST or None)
 	errors = None
 	if form.is_valid():
-		form.save()
-		return HttpResponseRedirect("/estate_agents/")
+		if request.user.is_authenticated():
+			instance = form.save(commit=False)
+			instance.owner = request.user
+			instance.save()
+			return HttpResponseRedirect("/estate_agents/")
+		else:
+			return HttpResponseRedirect("/login/")
 	
 	if form.errors:
 		print(form.errors)
@@ -60,7 +67,14 @@ class EstateAgentListView(ListView):
 class EstateAgentDetailView(DetailView):
 	queryset = EstateAgent.objects.all()
 
-class EstateAgentCreateView(CreateView):
+class EstateAgentCreateView(LoginRequiredMixin, CreateView):
 	form_class = EstateAgentCreateFormModel
 	template_name = 'estate_agent/form.html'
 	success_url = "/estate_agents/"
+	login_url="/login/"
+
+	def form_valid(self, form):
+		instance = form.save(commit=False)
+		instance.owner = self.request.user
+		# instance.save()
+		return super(EstateAgentCreateView, self).form_valid(form)
