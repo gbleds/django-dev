@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block head_title %} Properties for sale || {{ block.super }} {% endblock head_title %}
+{% block content%}
+
+<h1>Properties</h1>
+
+<ul>
+	{% for obj in object_list %}
+		<li><a href='#'>{{ obj.street_name }}</a><br/>
+		{{ obj.number_rooms }}, {{ obj.location }}, {{ obj.description }}, {{ obj.timestamp }} </li>
+	{% endfor %}
+
+</ul>
+
+{% endblock content %}
