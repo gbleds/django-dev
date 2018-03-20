@@ -13,3 +13,6 @@ class PropertyForm(forms.ModelForm):
 			'number_rooms',
 			'description'	
 		]
+	def __init__(self, *args, **kwargs):
+		print(kwargs.pop('user'))
+		super(PropertyForm, self).__init__(*args, **kwargs)
