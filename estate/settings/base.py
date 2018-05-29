@@ -40,7 +40,10 @@ INSTALLED_APPS = [
 
     'property',
     'estate_agent',
+    'accounts',
 ]
+
+AUTH_USER_MODEL = 'accounts.User'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
