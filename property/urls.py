@@ -10,5 +10,5 @@ from .views import (
 urlpatterns = [
     url(r'^$', PropertyListView.as_view(), name='list'),
     url(r'^create/$', PropertyCreateView.as_view(), name='create'),
-    url(r'^(?P<slug>[\w-]+)/$', PropertyDetailView.as_view(), name="detail"), 
+    url(r'^(?P<pk>[\d-]+)/$', PropertyDetailView.as_view(), name="detail"), 
 ]
