@@ -10,7 +10,7 @@ User = settings.AUTH_USER_MODEL
 
 # Create your models here.
 class EstateAgent(models.Model):
-	owner				= models.ForeignKey(User)
+	# owner				= models.ForeignKey(User)
 	name				= models.CharField(max_length=120)
 	address1			= models.CharField(max_length=120, null=True, blank=True)
 	address2			= models.CharField(max_length=120, null=True, blank=True, validators=[validate_location])	

@@ -51,12 +51,12 @@ class User(AbstractBaseUser):
 	staff 		= models.BooleanField(default=False)
 	admin 		= models.BooleanField(default=False)
 	timestamp 	= models.DateTimeField(auto_now_add=True)
-	# estate  	= models.OneToOneField(EstateAgent)
+	estate  	= models.ForeignKey(EstateAgent)
 
 	testfield  	= models.CharField(max_length=50)
 
 	USERNAME_FIELD = 'email' #username
-	REQUIRED_FIELDS = ['estate']
+	REQUIRED_FIELDS = []
 
 	objects = UserManager()
 
