@@ -17,6 +17,9 @@ class Property(models.Model):
 	# images			= models.TextField(blank=True, null=True, help_text="Picture locations")
 
 
+	def __str__(self):
+		return self.street_name
+		
 	def get_absolute_url(self):
 		return reverse('property:detail', kwargs={'pk': self.pk})
 

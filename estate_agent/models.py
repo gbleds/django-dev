@@ -13,7 +13,7 @@ class EstateAgent(models.Model):
 	# owner				= models.ForeignKey(User)
 	name				= models.CharField(max_length=120)
 	address1			= models.CharField(max_length=120, null=True, blank=True)
-	address2			= models.CharField(max_length=120, null=True, blank=True, validators=[validate_location])	
+	address2			= models.CharField(max_length=120, null=True, blank=True) # , validators=[validate_location]
 	postcode			= models.CharField(max_length=8)
 	timestamp			= models.DateTimeField(auto_now_add=True)
 	updated				= models.DateTimeField(auto_now=True)

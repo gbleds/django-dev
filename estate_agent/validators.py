@@ -12,7 +12,7 @@ def validate_email(value):
 	if ".edu" in email:
 		raise ValidationError("No email addresses ending with .edu allowed")
 
-LOCATIONS = ['Chelmsford', 'Ipswich', 'London', 'Colchester']
+# LOCATIONS = ['Chelmsford', 'Ipswich', 'London', 'Colchester']
 
 def validate_location(value):
 	cat = value.capitalize()
