@@ -7,8 +7,8 @@
 </head>
 <body>
 {% include 'snippets/nav.html' %}
-	<h1>Estate Agent</h1>
-
+	<h1>Levizja e duhur</h1>
+	<h2>Welcome, {{ user.email }} - {{ user.estate }}</h2>
 	<div class="container">
 	{% block content %}
 	{% endblock content %}
