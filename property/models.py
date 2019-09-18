@@ -1,12 +1,12 @@
 from django.conf import settings
 from django.db import models
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 
 from estate_agent.models import EstateAgent
 # Create your models here.
 class Property(models.Model):
-	user 			= models.ForeignKey(settings.AUTH_USER_MODEL)
-	estate_agent 	= models.ForeignKey(EstateAgent)
+	user 			= models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+	estate_agent 	= models.ForeignKey(EstateAgent, on_delete=models.CASCADE)
 	location		= models.CharField(max_length=120)
 	street_name 	= models.CharField(max_length=120)
 	property_type	= models.CharField(max_length=120)

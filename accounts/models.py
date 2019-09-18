@@ -51,7 +51,7 @@ class User(AbstractBaseUser):
 	staff 		= models.BooleanField(default=False)
 	admin 		= models.BooleanField(default=False)
 	timestamp 	= models.DateTimeField(auto_now_add=True)
-	estate  	= models.ForeignKey(EstateAgent)
+	estate  	= models.ForeignKey(EstateAgent, on_delete=models.CASCADE)
 
 	testfield  	= models.CharField(max_length=50)
 

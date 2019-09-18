@@ -30,8 +30,8 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', HomeView.as_view(), name='home'),
     url(r'^login/$', LoginView.as_view(), name='login'),
-    url(r'^estate_agent/', include('estate_agent.urls', namespace='estate_agents')),
-    url(r'^property/', include('property.urls', namespace='property')),
+    url(r'^estate_agent/', include(('estate_agent.urls', 'estate_agents'), namespace='estate_agents')),
+    url(r'^property/', include(('property.urls', 'property'), namespace='property')),
     url(r'^about/$', TemplateView.as_view(template_name="about.html"), name='about'),
     url(r'^contact/$', TemplateView.as_view(template_name="contact.html"), name='contact'),
 ]

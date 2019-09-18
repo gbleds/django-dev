@@ -4,7 +4,7 @@ from django.db.models.signals import pre_save, post_save
 
 from .utils import unique_slug_generator
 from .validators import validate_location
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 
 User = settings.AUTH_USER_MODEL
 
