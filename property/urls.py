@@ -1,4 +1,5 @@
 from django.conf.urls import url
+from django.urls import path, re_path
 
 from .views import (
 	PropertyListView,
@@ -8,7 +9,7 @@ from .views import (
 )
 
 urlpatterns = [
-    url(r'^$', PropertyListView.as_view(), name='list'),
-    url(r'^create/$', PropertyCreateView.as_view(), name='create'),
-    url(r'^(?P<pk>[\d-]+)/$', PropertyDetailView.as_view(), name="detail"), 
+    re_path(r'^$', PropertyListView.as_view(), name='list'),
+    re_path(r'^create/$', PropertyCreateView.as_view(), name='create'),
+    re_path(r'^(?P<pk>[\d-]+)/$', PropertyDetailView.as_view(), name="detail"), 
 ]

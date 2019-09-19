@@ -6,13 +6,17 @@ from .models import Property, EstateAgent
 from .forms import PropertyForm
 # Create your views here.
 
+
 class PropertyListView(ListView):
     def get_queryset(self):
         return Property.objects.filter()
 
+
 class PropertyDetailView(DetailView):
-    def get_queryset(self):
-        return Property.objects.filter(user=self.request.user)
+	queryset = Property.objects.all()
+    # def get_queryset(self):
+    #    return Property.objects.filter(id=self.kwargs['pk'])
+
 
 class PropertyCreateView(LoginRequiredMixin, CreateView):
     template_name = 'form.html'
@@ -39,9 +43,11 @@ class PropertyCreateView(LoginRequiredMixin, CreateView):
         context['title'] = 'Create Property'
         return context
 
+
 class PropertyUpdateView(LoginRequiredMixin, UpdateView):
     template_name = 'form.html'
     form_class = PropertyForm
+
     def get_queryset(self):
         return Property.objects.filter(user=self.request.user)
 
@@ -49,3 +55,4 @@ class PropertyUpdateView(LoginRequiredMixin, UpdateView):
         context = super(PropertyUpdateView, self).get_context_data(*args, **kwargs)
         context['title'] = 'Update Property'
         return context
+        

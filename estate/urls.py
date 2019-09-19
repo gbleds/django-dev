@@ -16,6 +16,7 @@ Including another URLconf
 from django.conf.urls import url, include
 from django.contrib import admin
 from django.views.generic.base import TemplateView
+from django.urls import path, re_path
 
 from django.contrib.auth.views import LoginView
 
@@ -31,7 +32,7 @@ urlpatterns = [
     url(r'^$', HomeView.as_view(), name='home'),
     url(r'^login/$', LoginView.as_view(), name='login'),
     url(r'^estate_agent/', include(('estate_agent.urls', 'estate_agents'), namespace='estate_agents')),
-    url(r'^property/', include(('property.urls', 'property'), namespace='property')),
+    re_path(r'^property/', include(('property.urls', 'property'), namespace='property')),
     url(r'^about/$', TemplateView.as_view(template_name="about.html"), name='about'),
     url(r'^contact/$', TemplateView.as_view(template_name="contact.html"), name='contact'),
 ]
