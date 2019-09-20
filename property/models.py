@@ -5,8 +5,8 @@ from django.urls import reverse
 from estate_agent.models import EstateAgent
 # Create your models here.
 class Property(models.Model):
-	user 			= models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
 	estate_agent 	= models.ForeignKey(EstateAgent, on_delete=models.CASCADE)
+	user 			= models.CharField(max_length=120)
 	location		= models.CharField(max_length=120)
 	street_name 	= models.CharField(max_length=120)
 	property_type	= models.CharField(max_length=120)

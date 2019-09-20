@@ -11,6 +11,7 @@ from django.views.generic.edit import CreateView
 
 from .forms import EstateAgentCreateForm, EstateAgentCreateFormModel
 from .models import EstateAgent
+from property.models import Property
 
 @login_required(login_url='login.html')
 def estate_agent_createview(request):
@@ -66,6 +67,7 @@ class EstateAgentListView(ListView):
 
 class EstateAgentDetailView(DetailView):
 	queryset = EstateAgent.objects.all()
+	# property_queryset = Property.objects.filter(estate_agent=self.kwargs['estate_agent'])
 
 class EstateAgentCreateView(LoginRequiredMixin, CreateView):
 	form_class = EstateAgentCreateFormModel
