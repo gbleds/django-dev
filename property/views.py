@@ -21,6 +21,7 @@ class PropertyDetailView(DetailView):
 class PropertyCreateView(LoginRequiredMixin, CreateView):
     template_name = 'form.html'
     form_class = PropertyForm
+    login_url="/login/"
 
     def form_valid(self, form):
         obj = form.save(commit=False)

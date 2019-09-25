@@ -80,7 +80,7 @@ class EstateAgentDetailView(DetailView):
 
 class EstateAgentCreateView(LoginRequiredMixin, CreateView):
 	form_class = EstateAgentCreateFormModel
-	template_name = 'form.html'
+	template_name = 'admin_form.html'
 	# success_url = "/estate_agents/"
 	login_url="/login/"
 	

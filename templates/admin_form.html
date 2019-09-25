@@ -2,6 +2,7 @@
 {% block head_title %} {{ title }} || {{ block.super }} {% endblock head_title %}
 {% block content%}
 
+{% if user.is_admin %}
 <h1>{{ title }}</h1>
 {% if form.errors.non_field_errors %}
 {{ form.errors.non_field_errors }}
@@ -10,4 +11,8 @@
 	{{ form.as_p }}
 	<button type="submit">Save</button>
 </form>
+{% else %}
+<h1>{{ title }}</h1>
+<p>You do not have permissions to create Estate Agent account</p>
+{% endif %}
 {% endblock content %}
