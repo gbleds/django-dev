@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block head_title %} Estate Agents || {{ block.super }} {% endblock head_title %}
+{% block content%}
+
+<h1>Details: {{ object.title }}, <small>{{ object.address2 }}</small></h1>
+<p>{{ object.updated }}</p>
+<h2>Properties listed by {{ object.title }}:</h2>
+
+{% if properties %}
+
+{% for property in properties %}
+<li><a href='{{ property.get_absolute_url }}'>{{ property }}</a><br />
+    {{ property.property_name }} </li>
+{% endfor %}
+
+{% else %}
+<p>Not properties listed from this Estate Agent</p>
+{% endif %}
+{% endblock content %}

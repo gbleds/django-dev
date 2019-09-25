@@ -1,3 +1,6 @@
 from django.shortcuts import render
+from accounts.models import User
+from django.views.generic.detail import DetailView
 
-# Create your views here.
+class UserDetailView(DetailView):
+    queryset = User.objects.all()

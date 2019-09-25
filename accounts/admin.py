@@ -20,7 +20,7 @@ class UserAdmin(BaseUserAdmin):
     list_filter = ('admin', 'estate',)
     readonly_fields = ('date_joined','last_login',)
     fieldsets = (
-        (None, {'fields': ('email', 'password')}),
+        (None, {'fields': ('email', 'password', 'date_joined', 'last_login')}),
         ('Personal info', {'fields': ()}),
         ('Permissions', {'fields': ('admin', 'staff', 'active', 'estate')}),
     )

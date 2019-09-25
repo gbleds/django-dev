@@ -34,6 +34,7 @@ urlpatterns = [
     re_path(r'^logout/$', LogoutView.as_view(), name='logout'),
     re_path(r'^estate_agent/', include(('estate_agent.urls', 'estate_agents'), namespace='estate_agents')),
     re_path(r'^property/', include(('property.urls', 'property'), namespace='property')),
+    re_path(r'^accounts/', include(('accounts.urls', 'property'), namespace='accounts')),
     re_path(r'^about/$', TemplateView.as_view(template_name="about.html"), name='about'),
     re_path(r'^contact/$', TemplateView.as_view(template_name="contact.html"), name='contact'),
 ]
