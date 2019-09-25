@@ -5,20 +5,18 @@ from django.contrib.auth.models import(
 )
 
 class UserManager(BaseUserManager):
-	def create_user(self, email, estate, password=None, is_active=True, is_staff=False, is_admin=False):
+	def create_user(self, email, password=None, is_active=True, is_staff=False, is_admin=False):
 		if not email:
 			raise ValueError("Users must have an email address")
 		if not password:
 			raise ValueError("Users must have a password")
-		if not estate:
-			raise ValueError("Users need to be assigned to an estate")
 
 		user_obj = self.model(
 			email = self.normalize_email(email)
 		)
 
 		user_obj.set_password(password)
-		user_obj.staff = estate
+		# user_obj.staff = estate
 		user_obj.staff = is_staff
 		user_obj.admin = is_admin
 		user_obj.active = is_active
@@ -34,12 +32,11 @@ class UserManager(BaseUserManager):
 		)
 		return user
 
-	def create_superuser(self, email, estate, password=None):
+	def create_superuser(self, email, password=None):
 		user = self.create_user(
 			email,
 			password=password,
 			is_staff=True,
-			estate = estate,
 			is_admin=True
 		)
 		return user
@@ -51,8 +48,9 @@ class User(AbstractBaseUser):
 	active 		= models.BooleanField(default=False)
 	staff 		= models.BooleanField(default=False)
 	admin 		= models.BooleanField(default=False)
-	timestamp 	= models.DateTimeField(auto_now_add=True)
-	estate  	= models.ForeignKey(EstateAgent, on_delete=models.CASCADE)
+	date_joined	= models.DateTimeField(verbose_name='date joined', auto_now_add=True)
+	last_login	= models.DateTimeField(verbose_name='last login', auto_now_add=True)
+	estate  	= models.ForeignKey(EstateAgent, on_delete=models.CASCADE, blank=True, null=True)
 
 	testfield  	= models.CharField(max_length=50)
 

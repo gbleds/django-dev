@@ -67,15 +67,25 @@ class EstateAgentListView(ListView):
 
 class EstateAgentDetailView(DetailView):
 	queryset = EstateAgent.objects.all()
+	# print(queryset)
 	# property_queryset = Property.objects.filter(estate_agent=self.kwargs['estate_agent'])
+
+	def get_context_data(self, **kwargs):
+		context = super(EstateAgentDetailView , self).get_context_data(**kwargs)
+		# extract estate agent ID that is used by this DetailView
+		estateagent = EstateAgent.objects.filter(slug=self.kwargs.get('slug'))
+		context['properties'] = Property.objects.filter(estate_agent=estateagent[0].id)
+		print("PK: ", self.kwargs)
+		return context
 
 class EstateAgentCreateView(LoginRequiredMixin, CreateView):
 	form_class = EstateAgentCreateFormModel
 	template_name = 'form.html'
 	# success_url = "/estate_agents/"
 	login_url="/login/"
-
+	
 	def form_valid(self, form):
+
 		instance = form.save(commit=False)
 		instance.owner = self.request.user
 		# instance.save()

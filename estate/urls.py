@@ -18,7 +18,7 @@ from django.contrib import admin
 from django.views.generic.base import TemplateView
 from django.urls import path, re_path
 
-from django.contrib.auth.views import LoginView
+from django.contrib.auth.views import LoginView, LogoutView
 
 from estate_agent.views import (
     HomeView, 
@@ -28,11 +28,12 @@ from estate_agent.views import (
 )
 
 urlpatterns = [
-    url(r'^admin/', admin.site.urls),
-    url(r'^$', HomeView.as_view(), name='home'),
-    url(r'^login/$', LoginView.as_view(), name='login'),
-    url(r'^estate_agent/', include(('estate_agent.urls', 'estate_agents'), namespace='estate_agents')),
+    re_path(r'^admin/', admin.site.urls),
+    re_path(r'^$', HomeView.as_view(), name='home'),
+    re_path(r'^login/$', LoginView.as_view(), name='login'),
+    re_path(r'^logout/$', LogoutView.as_view(), name='logout'),
+    re_path(r'^estate_agent/', include(('estate_agent.urls', 'estate_agents'), namespace='estate_agents')),
     re_path(r'^property/', include(('property.urls', 'property'), namespace='property')),
-    url(r'^about/$', TemplateView.as_view(template_name="about.html"), name='about'),
-    url(r'^contact/$', TemplateView.as_view(template_name="contact.html"), name='contact'),
+    re_path(r'^about/$', TemplateView.as_view(template_name="about.html"), name='about'),
+    re_path(r'^contact/$', TemplateView.as_view(template_name="contact.html"), name='contact'),
 ]
