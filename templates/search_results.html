@@ -14,6 +14,6 @@
         {% endfor %}
 </ul>
 {% else %}
-<p>No results for this search</p>
+<p>No results for location <i>{{ request.GET.q }}</i></p>
 {% endif %}
 {% endblock content %}
