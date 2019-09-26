@@ -76,7 +76,7 @@ class EstateAgentDetailView(DetailView):
 		estateagent = EstateAgent.objects.filter(slug=self.kwargs.get('slug'))
 		context['properties'] = Property.objects.filter(estate_agent=estateagent[0].id)
 		print("PK: ", self.kwargs)
-		return contextlogin_url="/login/"
+		return context 
 
 class EstateAgentCreateView(LoginRequiredMixin, CreateView):
 	form_class = EstateAgentCreateFormModel

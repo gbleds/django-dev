@@ -6,5 +6,8 @@
 	{% for list in mylist %}
 		{{list}}
 	{% endfor %}
-
+<h2>Search for property:</h2>
+	<form action="{% url 'property:search_results' %}" method="get">
+			<input name="q" type="text" placeholder="Enter location...">
+	</form>
 {% endblock content %}

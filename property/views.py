@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import ListView, DetailView, CreateView, UpdateView
+from django.db.models import Q
 
 from .models import Property, EstateAgent
 from .forms import PropertyForm
@@ -56,4 +57,14 @@ class PropertyUpdateView(LoginRequiredMixin, UpdateView):
         context = super(PropertyUpdateView, self).get_context_data(*args, **kwargs)
         context['title'] = 'Update Property'
         return context
-        
+
+class SearchResultsView(ListView):
+    model = Property
+    template_name = 'search_results.html'
+
+    def get_queryset(self): # new
+        query = self.request.GET.get('q')
+        object_list = Property.objects.filter(
+            Q(location__icontains=query)
+        )
+        return object_list
